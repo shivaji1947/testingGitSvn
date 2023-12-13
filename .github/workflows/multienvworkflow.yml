@@ -9,11 +9,11 @@
       runs-on: ubuntu-latest
       environment: DEV
     #steps represents a sequences of the tasks will be executed as part of the job.
-    steps:
-      #Checkout-out your repository unders GITHIB-WORKSPACEso your job can access with
-      - uses: actions/checkout@v2
-      - name: Run a script
-        run: |
+      steps:
+      # Checkout-out your repository unders GITHIB-WORKSPACEso your job can access with
+       - uses: actions/checkout@v2
+       - name: Script a Dev
+         run: |
            echo " I am running a job in the DEV environment"
     QA:
       # The type of runners that the job will be run on
