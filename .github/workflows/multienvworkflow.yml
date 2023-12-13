@@ -1,0 +1,48 @@
+  name: Deploy WF on Dev - UAT - PROD env
+
+  on:
+
+    workflow_dispatch:
+  jobs:
+
+    DEV:
+      runs-on: ubuntu-latest
+      environment: DEV
+    #steps represents a sequences of the tasks will be executed as part of the job.
+    steps:
+      #Checkout-out your repository unders GITHIB-WORKSPACEso your job can access with
+      - uses: actions/checkout@v2
+      - name: Run a script
+        run: |
+           echo " I am running a job in the DEV environment"
+    QA:
+      # The type of runners that the job will be run on
+      runs-on: ubuntu-latest
+      environment: QA
+      # its a condition that tells run job in QA once its complete on DEV Env
+      needs: DEV
+
+      steps:
+
+        - uses: actions/checkout@v2
+
+        - name: Run a QA script
+          run: |
+            echo " I am Running job in the QA Environment"
+
+    PROD:
+
+      runs-on: ubuntu-latest
+
+      environment: PROD
+      needs: QA
+
+      steps:
+
+        - uses: actions/checkout@v2
+
+        - name: Run a PROD env
+
+          run: |
+           echo " I am running job on PROD env  "
+            
